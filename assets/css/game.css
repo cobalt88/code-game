@@ -12,10 +12,15 @@ header {
   margin: 50px;
 }
 
-.howItWorks {
+.options button {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center;
+  margin: 25px;
+  width: 600px;
+  height: 75px;
+  background-color: rgb(110, 21, 198);
+  box-shadow: 5px;
+  border-radius: 20px;
 }
