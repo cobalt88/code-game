@@ -8,9 +8,14 @@ body {
   align-items: center;
 }
 
-header {
+header, header h2 {
+  display: flex;
   margin: 50px;
+  flex-direction: row;
+  align-items: center;
 }
+
+
 
 .options button {
   display: flex;
