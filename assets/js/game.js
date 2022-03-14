@@ -5,6 +5,7 @@ var option2El = document.querySelector('#option2');
 var option3El = document.querySelector('#option3');
 var option4El = document.querySelector('#option4');
 var questionEl = document.querySelector('#question');
+var answers = document.querySelector(".answers")
 // let options = document.querySelector([])
 var timeLeft = 40
 var score = 0;
@@ -14,10 +15,10 @@ const questions = [
   {
     question: "question1 goes here",
     answer1: "answer1 goes here",
-    answer2: "answer2 goes here",
+    answer2: "correct answer goes here",
     answer3: "answer3 goes here",
     answer4: "answer4 goes here",
-    solution: option1El,
+    correctAnswer: option2El,
   }, 
   {
     question: "question2 goes here",
@@ -42,8 +43,6 @@ const questions = [
   }
 ]
 
-console.log(questions)
-console.log(questions[0].solution)
 
 
 function countdown() {
@@ -91,15 +90,27 @@ function displayMessage2() {
 
 
 function generateQuestions() {
-
-
-
   // generate text content of question
+    let correctAnswer = questions[questionsObj].
     questionEl.textContent = questions[questionsObj].question;
     option1El.textContent = questions[questionsObj].answer1;
     option2El.textContent = questions[questionsObj].answer2;
     option3El.textContent = questions[questionsObj].answer3;
     option4El.textContent = questions[questionsObj].answer4;
+
+    var answer = questions[questionsObj].correctAnswer;
+    
+
+
+    answers.addEventListener("click", function checkAnswer() {
+      if (EventTarget === answer) {
+        score = score + 10;
+        questionsObj = questionsObj + 1;
+      } else { 
+        score = score - 10;
+        timeLeft = timeLeft - 10;
+      }
+      })
 
     // var correctAnswer = questions[0].solution;
 
@@ -111,14 +122,20 @@ function generateQuestions() {
 
 }
 
-var correctAnswer = questions[0].solution;
+// var correctAnswer = questions[0].solution;
 
-    correctAnswer.addEventListener("click", solution);
+//     correctAnswer.addEventListener("click", solution);
 
+
+
+// function checkAnswer () {
+//   if 
+// }
 function solution(){
   score = score + 10;
   questionsObj = questionsObj + 1;
 }
+
 
 
 // function question1() {
@@ -135,9 +152,7 @@ function solution(){
 //       console.log("This works!")
 //       console.log(this)
 //     })
-// wrongAsnwer.addEventListener("click", function(){
-//   timeLeft = timeLeft - 10;
-// })
+
 
 // option1El.addEventListener('click', function() {
 //   score = score + 1;
