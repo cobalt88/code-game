@@ -103,7 +103,8 @@ function generateQuestions() {
   
     var solution = questions[questionsObj].correctAnswer;
     
-
+// look at task handler, maybe use event.target.addEventListener?
+//also look at taskStatusChangeHandler for an idea on how to make this work.
 
     answers.addEventListener("click", function checkAnswer() {
       if (EventTarget === solution) {
