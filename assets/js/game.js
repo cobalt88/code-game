@@ -18,7 +18,7 @@ const questions = [
     answer2: "correct answer goes here",
     answer3: "answer3 goes here",
     answer4: "answer4 goes here",
-    correctAnswer: option2El,
+    correctAnswer: option1El,
   }, 
   {
     question: "question2 goes here",
@@ -26,6 +26,7 @@ const questions = [
     answer2: "answer2 goes here",
     answer3: "answer3 goes here",
     answer4: "answer4 goes here",
+    correctAnswer: option2El,
   },
   {
     question: "question3 goes here",
@@ -33,6 +34,7 @@ const questions = [
     answer2: "answer2 goes here",
     answer3: "answer3 goes here",
     answer4: "answer4 goes here",
+    correctAnswer: option3El
   },
   {
     question: "question4 goes here",
@@ -40,6 +42,7 @@ const questions = [
     answer2: "answer2 goes here",
     answer3: "answer3 goes here",
     answer4: "answer4 goes here",
+    correctAnswer: option4El
   }
 ]
 
@@ -91,25 +94,28 @@ function displayMessage2() {
 
 function generateQuestions() {
   // generate text content of question
-    let correctAnswer = questions[questionsObj].
     questionEl.textContent = questions[questionsObj].question;
     option1El.textContent = questions[questionsObj].answer1;
     option2El.textContent = questions[questionsObj].answer2;
     option3El.textContent = questions[questionsObj].answer3;
     option4El.textContent = questions[questionsObj].answer4;
 
-    var answer = questions[questionsObj].correctAnswer;
+  
+    var solution = questions[questionsObj].correctAnswer;
     
 
 
     answers.addEventListener("click", function checkAnswer() {
-      if (EventTarget === answer) {
+      if (EventTarget === solution) {
         score = score + 10;
-        questionsObj = questionsObj + 1;
+        questionsObj++;
       } else { 
         score = score - 10;
         timeLeft = timeLeft - 10;
+        questionsObj++;
       }
+
+      console.log(score)
       })
 
     // var correctAnswer = questions[0].solution;
@@ -131,10 +137,10 @@ function generateQuestions() {
 // function checkAnswer () {
 //   if 
 // }
-function solution(){
-  score = score + 10;
-  questionsObj = questionsObj + 1;
-}
+// function solution(){
+//   score = score + 10;
+//   questionsObj = questionsObj + 1;
+// }
 
 
 
