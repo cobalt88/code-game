@@ -1,12 +1,12 @@
 
 //timeDisplayEl is the actual countdown
-var timeDisplayEl = document.getElementById('time');
+var timeDisplayEl = document.querySelector('#time');
 //timeEl is the header element that contains the countdown
-var timerEl = document.getElementById('timer');
+var timerEl = document.querySelector('#timer');
 //scoreDisplayEl is where the score cariable is diaplyed
-var scoreDisplayEl = document.getElementById('score');
+var scoreDisplayEl = document.querySelector('#score');
 //scoreEl is the header that contains the score display
-var scoreEl = document.getElementById('scoreTracker')
+var scoreEl = document.querySelector('#scoreTracker')
 var startEl = document.querySelector('#start');
 var option1El = document.querySelector('#option1');
 var option2El = document.querySelector('#option2');
@@ -16,8 +16,8 @@ var questionEl = document.querySelector('#question');
 var answers = document.querySelector(".answers");
 var options = document.querySelector(".options");
 var button = document.getElementsByTagName("button");
-let timeLeft = 40;
-let score = 0;
+var timeLeft = 40;
+var score = 0;
 var questionsObj = 0;
 const questions = [
 
@@ -64,7 +64,7 @@ function hideQuestions() {
   timerEl.setAttribute('style', 'display: none;');
 }
 
-function startQuiz(event) {
+function startQuiz() {
   startEl.setAttribute('style', 'display: none;');
   option1El.setAttribute('style', 'display: visible;');
   option2El.setAttribute('style', 'display: visible;');
@@ -72,56 +72,56 @@ function startQuiz(event) {
   option4El.setAttribute('style', 'display: visible;');
   scoreEl.setAttribute('style', 'display: visible;');
   timerEl.setAttribute('style', 'display: visible;');
-
-  timeDisplayEl.textContent = timeLeft;
-  scoreDisplayEl.textContent = score;
-
+  displayScore();
   generateQuestions();
   countdown();
+  
 }
 
 function countdown() {
 
   var timeInterval = setInterval(function () {
-    
+    timeDisplayEl.textContent = timeLeft;
+
     if (timeLeft > 0) {
       timeLeft--;
     } else {
       timeDisplayEl.textContent = (' ');
       clearInterval(timeInterval);
       displayMessage();
-      option1El.setAttribute('style', 'display: none;');
-      option2El.setAttribute('style', 'display: none;');
-      option3El.setAttribute('style', 'display: none;');
-      option4El.setAttribute('style', 'display: none;');
-      
-
+      hideQuestions();
     }
   }, 1000);
 }
 
-function scoreTracker() {
-  if (score >= 0) {
-    // scoreEl.textContent = (`Your Score: ${score}`);
-  } else {
-    scoreEl.textContent = (' ')
-  }
-}
+
+
+// function scoreTracker() {
+
+//   if (score >= 0) {
+//     scoreEl.textContent = score;
+//   } else {
+//     scoreDisplayEl.textContent = (' ')
+//   }
+// }
 
 function verifyAnswerHandler(event){
   var targetEl = event.target;
   var targetData = targetEl.getAttribute("class");
 
-
   if (targetData === 'correct' ) {
-    score = score + 10;
-
+    var updatedScore = score + 10;
 
   } else if (targetData === 'incorrect') {
     timeLeft = timeLeft - 10;
-  }
+  } console.log(score);
 }
 
+console.log(updatedScore);
+
+function displayScore() {
+  scoreEl.textContent = (`Current Score: ${updatedScore}`);
+}
 
 function displayMessage() {
   questionEl.textContent = (`Times Up! Your score for this round is: ${score}`);
