@@ -6,6 +6,9 @@ var option3El = document.querySelector('#option3');
 var option4El = document.querySelector('#option4');
 var questionEl = document.querySelector('#question');
 var answers = document.querySelector(".answers")
+var options = document.querySelector(".options")
+var button = document.getElementsByTagName("button")
+var data = button.getAttribute('data');
 // let options = document.querySelector([])
 var timeLeft = 40
 var score = 0;
@@ -13,12 +16,16 @@ questionsObj = 0;
 const questions = [
 
   {
-    question: "question1 goes here",
-    answer1: "answer1 goes here",
+    question: "question1 goes here",  
+    answer1: "answer1 goes here", 
+    data1: 'correct',
     answer2: "correct answer goes here",
+    data2: 'incorrect',
     answer3: "answer3 goes here",
+    data3: 'incorrect',
     answer4: "answer4 goes here",
-    correctAnswer: option1El,
+    data4: 'incorrect',
+    // correctAnswer: option1El,
   }, 
   {
     question: "question2 goes here",
@@ -26,7 +33,6 @@ const questions = [
     answer2: "answer2 goes here",
     answer3: "answer3 goes here",
     answer4: "answer4 goes here",
-    correctAnswer: option2El,
   },
   {
     question: "question3 goes here",
@@ -34,7 +40,6 @@ const questions = [
     answer2: "answer2 goes here",
     answer3: "answer3 goes here",
     answer4: "answer4 goes here",
-    correctAnswer: option3El
   },
   {
     question: "question4 goes here",
@@ -42,10 +47,8 @@ const questions = [
     answer2: "answer2 goes here",
     answer3: "answer3 goes here",
     answer4: "answer4 goes here",
-    correctAnswer: option4El
   }
-]
-
+];
 
 
 function countdown() {
@@ -66,22 +69,38 @@ function countdown() {
     }
   }, 1000);
 }
-
+ 
 
 startEl.addEventListener('click', function () {
   startEl.setAttribute('style', 'display: none;');
-  // displayQuestions();
+  displayQuestions();
   countdown();
   generateQuestions();
   
 })
 
-// function displayQuestions() {
-//   option1El.setAttribute('style', 'display: ;')
-//   option2El.setAttribute('style', 'display: none;')
-//   option3El.setAttribute('style', 'display: none;')
-//   option4El.setAttribute('style', 'display: none;')
-// }
+function hideQuestions() {
+  option1El.setAttribute('style', 'display: none;')
+  option2El.setAttribute('style', 'display: none;')
+  option3El.setAttribute('style', 'display: none;')
+  option4El.setAttribute('style', 'display: none;')
+}
+
+function displayQuestions() {
+  option1El.setAttribute('style', 'display: visible;')
+  option2El.setAttribute('style', 'display: visible;')
+  option3El.setAttribute('style', 'display: visible;')
+  option4El.setAttribute('style', 'display: visible;')
+}
+
+function checkAnswer(){
+  if (dataId = correct ) {
+    var check = true;
+  } else {
+    check = false;
+  }
+}
+
 
 function displayMessage() {
   questionEl.textContent = (`Times Up! Your score for this round is: ${score}`);
@@ -95,19 +114,28 @@ function displayMessage2() {
 function generateQuestions() {
   // generate text content of question
     questionEl.textContent = questions[questionsObj].question;
-    option1El.textContent = questions[questionsObj].answer1;
-    option2El.textContent = questions[questionsObj].answer2;
-    option3El.textContent = questions[questionsObj].answer3;
-    option4El.textContent = questions[questionsObj].answer4;
-
-  
-    var solution = questions[questionsObj].correctAnswer;
     
+    option1El.textContent = questions[questionsObj].answer1;
+    option1El.setAttribute('data', questions[questionsObj].data1)
+    let dataId = this.data;
+
+    option2El.textContent = questions[questionsObj].answer2;
+    option2El.setAttribute('data', questions[questionsObj].data2)
+    // option1El.on('click', checkAnswer)
+
+    option3El.textContent = questions[questionsObj].answer3;
+    // option1El.on('click', checkAnswer)
+
+    option4El.textContent = questions[questionsObj].answer4;
+    // option1El.on('click', checkAnswer)
+    console.log(option1El)
+    console.log(option2El)
+}
 // look at task handler, maybe use event.target.addEventListener?
 //also look at taskStatusChangeHandler for an idea on how to make this work.
 
-    answers.addEventListener("click", function checkAnswer() {
-      if (EventTarget === solution) {
+    options.addEventListener("click", function checkAnswer() {
+      if (check) {
         score = score + 10;
         questionsObj++;
       } else { 
@@ -115,9 +143,9 @@ function generateQuestions() {
         timeLeft = timeLeft - 10;
         questionsObj++;
       }
-
-      console.log(score)
-      })
+    })
+    //   console.log(score)
+    //   })
 
     // var correctAnswer = questions[0].solution;
 
@@ -127,7 +155,7 @@ function generateQuestions() {
 
     // inCorrectAnswer.addEventListener("click", solution);
 
-}
+
 
 // var correctAnswer = questions[0].solution;
 
@@ -206,3 +234,4 @@ function generateQuestions() {
 
 // }
 
+hideQuestions();
