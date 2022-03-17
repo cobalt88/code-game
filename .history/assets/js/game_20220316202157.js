@@ -204,7 +204,7 @@ function verifyAnswerHandler(event){
 
   if (targetData === 'correct' ) {
     score = score + 10;
-      if (questionsObj < 9) {
+      if (questionsObj < 10) {
         questionsObj++;
         generateQuestions();
         scoreTracker();
@@ -213,14 +213,14 @@ function verifyAnswerHandler(event){
   
   if (targetData === 'incorrect') {
     timeLeft = timeLeft - 10;
-      if (questionsObj < 9) {
+      if (questionsObj < 10) {
         questionsObj++;
         generateQuestions();
         scoreTracker();
       } 
   }
   
-  if (questionsObj >= 9) {
+  if (questionsObj >= 10) {
     endQuiz();
   }
 } 

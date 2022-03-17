@@ -172,23 +172,13 @@ function countdown() {
 }
 
 function endQuiz() {
-
-  if (timeLeft <= 0) {
-    displayMessage();
-    hideQuestions();
-  }
-  if (timeLeft >= 0) {
   timeLeft = 0;
   option1El.setAttribute('style', 'display: none;');
   option2El.setAttribute('style', 'display: none;');
   option3El.setAttribute('style', 'display: none;');
   option4El.setAttribute('style', 'display: none;');
   timerEl.setAttribute('style', 'display: none;');
-  scoreEl.setAttribute('style', 'display: none;');
-  questionEl.textContent = (' ')
-  displayMessage2();
-  } 
-  
+  displayMessage2(;)
 }
 
 
@@ -208,7 +198,9 @@ function verifyAnswerHandler(event){
         questionsObj++;
         generateQuestions();
         scoreTracker();
-      } 
+      } else {
+        endQuiz();
+        }
   }
   
   if (targetData === 'incorrect') {
@@ -217,12 +209,10 @@ function verifyAnswerHandler(event){
         questionsObj++;
         generateQuestions();
         scoreTracker();
-      } 
-  }
-  
-  if (questionsObj >= 9) {
-    endQuiz();
-  }
+      } else {
+        endQuiz();
+        }
+  } 
 } 
 
 function displayMessage() {
@@ -236,7 +226,6 @@ function displayMessage2() {
 
 function generateQuestions() {
   // generate text content of question
-  if (timeLeft >= 1) {
     questionEl.textContent = questions[questionsObj].question;
     
     option1El.textContent = questions[questionsObj].answer1;
@@ -250,7 +239,7 @@ function generateQuestions() {
 
     option4El.textContent = questions[questionsObj].answer4;
     option4El.setAttribute('class', questions[questionsObj].data4);
-}
+
 }
 
 

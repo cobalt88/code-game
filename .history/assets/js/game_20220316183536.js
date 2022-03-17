@@ -64,72 +64,6 @@ const questions = [
     data3: 'incorrect',
     answer4: "answer4 goes here",
     data4: 'incorrect',
-  }, 
-  {
-    question: "question5 goes here",
-    answer1: "answer1 goes here",
-    data1: 'correct',
-    answer2: "answer2 goes here",
-    data2: 'incorrect',
-    answer3: "answer3 goes here",
-    data3: 'incorrect',
-    answer4: "answer4 goes here",
-    data4: 'incorrect',
-  },
-  {
-    question: "question6 goes here",
-    answer1: "answer1 goes here",
-    data1: 'correct',
-    answer2: "answer2 goes here",
-    data2: 'incorrect',
-    answer3: "answer3 goes here",
-    data3: 'incorrect',
-    answer4: "answer4 goes here",
-    data4: 'incorrect',
-  },
-  {
-    question: "question7 goes here",
-    answer1: "answer1 goes here",
-    data1: 'correct',
-    answer2: "answer2 goes here",
-    data2: 'incorrect',
-    answer3: "answer3 goes here",
-    data3: 'incorrect',
-    answer4: "answer4 goes here",
-    data4: 'incorrect',
-  },
-  {
-    question: "question8 goes here",
-    answer1: "answer1 goes here",
-    data1: 'correct',
-    answer2: "answer2 goes here",
-    data2: 'incorrect',
-    answer3: "answer3 goes here",
-    data3: 'incorrect',
-    answer4: "answer4 goes here",
-    data4: 'incorrect',
-  },
-  {
-    question: "question9 goes here",
-    answer1: "answer1 goes here",
-    data1: 'correct',
-    answer2: "answer2 goes here",
-    data2: 'incorrect',
-    answer3: "answer3 goes here",
-    data3: 'incorrect',
-    answer4: "answer4 goes here",
-    data4: 'incorrect',
-  },
-  {
-    question: "question10 goes here",
-    answer1: "answer1 goes here",
-    data1: 'correct',
-    answer2: "answer2 goes here",
-    data2: 'incorrect',
-    answer3: "answer3 goes here",
-    data3: 'incorrect',
-    answer4: "answer4 goes here",
-    data4: 'incorrect',
   }
 ];
 
@@ -150,7 +84,7 @@ function startQuiz() {
   option4El.setAttribute('style', 'display: visible;');
   scoreEl.setAttribute('style', 'display: visible;');
   timerEl.setAttribute('style', 'display: visible;');
-  scoreTracker();
+  displayScore();
   generateQuestions();
   countdown();
   
@@ -159,42 +93,26 @@ function startQuiz() {
 function countdown() {
 
   var timeInterval = setInterval(function () {
-        timeDisplayEl.textContent = timeLeft;
+    timeDisplayEl.textContent = timeLeft;
 
     if (timeLeft > 0) {
       timeLeft--;
     } else {
       timeDisplayEl.textContent = (' ');
       clearInterval(timeInterval);
-      endQuiz();
+      displayMessage();
+      hideQuestions();
     }
   }, 1000);
-}
-
-function endQuiz() {
-
-  if (timeLeft <= 0) {
-    displayMessage();
-    hideQuestions();
-  }
-  if (timeLeft >= 0) {
-  timeLeft = 0;
-  option1El.setAttribute('style', 'display: none;');
-  option2El.setAttribute('style', 'display: none;');
-  option3El.setAttribute('style', 'display: none;');
-  option4El.setAttribute('style', 'display: none;');
-  timerEl.setAttribute('style', 'display: none;');
-  scoreEl.setAttribute('style', 'display: none;');
-  questionEl.textContent = (' ')
-  displayMessage2();
-  } 
-  
 }
 
 
 
 function scoreTracker() {
-  if (score >= 0 && timeLeft > 0) {
+
+  
+
+  if (score >= 0) {
     scoreEl.textContent = (`Current Score: ${score}`);
 }}
 
@@ -204,26 +122,20 @@ function verifyAnswerHandler(event){
 
   if (targetData === 'correct' ) {
     score = score + 10;
-      if (questionsObj < 9) {
-        questionsObj++;
-        generateQuestions();
-        scoreTracker();
-      } 
-  }
-  
-  if (targetData === 'incorrect') {
+    questionsObj++;
+
+  } else if (targetData === 'incorrect') {
     timeLeft = timeLeft - 10;
-      if (questionsObj < 9) {
-        questionsObj++;
-        generateQuestions();
-        scoreTracker();
-      } 
-  }
-  
-  if (questionsObj >= 9) {
-    endQuiz();
-  }
-} 
+    questionsObj++;
+  } console.log(questionsObj);
+}
+
+// console.log(updatedScore);
+
+// function displayScore() {
+//   if (score >= 0) {
+//   scoreEl.textContent = ;
+// }}
 
 function displayMessage() {
   questionEl.textContent = (`Times Up! Your score for this round is: ${score}`);
@@ -236,7 +148,6 @@ function displayMessage2() {
 
 function generateQuestions() {
   // generate text content of question
-  if (timeLeft >= 1) {
     questionEl.textContent = questions[questionsObj].question;
     
     option1El.textContent = questions[questionsObj].answer1;
@@ -250,7 +161,7 @@ function generateQuestions() {
 
     option4El.textContent = questions[questionsObj].answer4;
     option4El.setAttribute('class', questions[questionsObj].data4);
-}
+
 }
 
 

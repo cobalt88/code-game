@@ -176,7 +176,7 @@ function endQuiz() {
   if (timeLeft <= 0) {
     displayMessage();
     hideQuestions();
-  }
+
   if (timeLeft >= 0) {
   timeLeft = 0;
   option1El.setAttribute('style', 'display: none;');
@@ -185,10 +185,9 @@ function endQuiz() {
   option4El.setAttribute('style', 'display: none;');
   timerEl.setAttribute('style', 'display: none;');
   scoreEl.setAttribute('style', 'display: none;');
-  questionEl.textContent = (' ')
   displayMessage2();
   } 
-  
+  }
 }
 
 
@@ -208,7 +207,9 @@ function verifyAnswerHandler(event){
         questionsObj++;
         generateQuestions();
         scoreTracker();
-      } 
+      } else {
+        endQuiz();
+        }
   }
   
   if (targetData === 'incorrect') {
@@ -217,12 +218,10 @@ function verifyAnswerHandler(event){
         questionsObj++;
         generateQuestions();
         scoreTracker();
-      } 
-  }
-  
-  if (questionsObj >= 9) {
-    endQuiz();
-  }
+      } else {
+        endQuiz();
+        }
+  } 
 } 
 
 function displayMessage() {

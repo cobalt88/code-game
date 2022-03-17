@@ -185,7 +185,6 @@ function endQuiz() {
   option4El.setAttribute('style', 'display: none;');
   timerEl.setAttribute('style', 'display: none;');
   scoreEl.setAttribute('style', 'display: none;');
-  questionEl.textContent = (' ')
   displayMessage2();
   } 
   
@@ -213,7 +212,7 @@ function verifyAnswerHandler(event){
   
   if (targetData === 'incorrect') {
     timeLeft = timeLeft - 10;
-      if (questionsObj < 9) {
+      if (questionsObj < 8) {
         questionsObj++;
         generateQuestions();
         scoreTracker();

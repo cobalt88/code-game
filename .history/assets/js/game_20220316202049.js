@@ -186,7 +186,7 @@ function endQuiz() {
   timerEl.setAttribute('style', 'display: none;');
   scoreEl.setAttribute('style', 'display: none;');
   questionEl.textContent = (' ')
-  displayMessage2();
+  // displayMessage2();
   } 
   
 }

@@ -185,8 +185,7 @@ function endQuiz() {
   option4El.setAttribute('style', 'display: none;');
   timerEl.setAttribute('style', 'display: none;');
   scoreEl.setAttribute('style', 'display: none;');
-  questionEl.textContent = (' ')
-  displayMessage2();
+  // displayMessage2();
   } 
   
 }
