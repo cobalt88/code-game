@@ -276,24 +276,25 @@ function generateQuestions() {
 //   // console.log(loadScoreArr);
 // }
 
-function saveScore() {
+function saveHighScore(event) {
 
-  var playerName = document.querySelector("#player-input").value;
-  var scoreData = JSON.parse(localStorage.getItem('playerData')); 
+  var scoreData = JSON.parse(localStorage.getItem('savedScores')); 
     if (scoreData === null) {
       scoreData = [];
     }
+
+  var playerName = document.querySelector("#player-input").value;
 
   var playerData = {
     player: playerName,
     score: score,
   };
 
-  localStorage.setItem('playerData', JSON.stringify([playerData]));
+  localStorage.setItem('playerData', JSON.stringify(playerData));
 
   scoreData.push(playerData);
 
-  localStorage.setItem('playerData', JSON.stringify(scoreData))
+  localStorage.setItem('savedScores', JSON.stringify(scoreData))
   
   // startEl.setAttribute('style', 'display: visible;');
   // hideElements();
@@ -303,7 +304,7 @@ function saveScore() {
 
 
 
-saveButton.addEventListener('click', saveScore());
+saveButton.addEventListener('click', saveHighScore);
 
 startEl.addEventListener('click', startQuiz);
 

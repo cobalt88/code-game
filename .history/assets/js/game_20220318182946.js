@@ -276,7 +276,7 @@ function generateQuestions() {
 //   // console.log(loadScoreArr);
 // }
 
-function saveScore() {
+function saveHighScore() {
 
   var playerName = document.querySelector("#player-input").value;
   var scoreData = JSON.parse(localStorage.getItem('playerData')); 
@@ -303,7 +303,7 @@ function saveScore() {
 
 
 
-saveButton.addEventListener('click', saveScore());
+saveButton.addEventListener('click', saveHighScore());
 
 startEl.addEventListener('click', startQuiz);
 

@@ -155,7 +155,7 @@ function startQuiz() {
   option4El.setAttribute('style', 'display: visible;');
   scoreEl.setAttribute('style', 'display: visible;');
   timerEl.setAttribute('style', 'display: visible;');
-  // loadScores();
+  loadScores();
   // console.log(storedScores);
   scoreTracker();
   generateQuestions();
@@ -266,34 +266,28 @@ function generateQuestions() {
   }
 }
 
-// function loadScores(){
-//   var loadScoreArr = [];
-//   loadScoreArr.push(scoreData);
+function loadScores(){
+  var loadScoreArr = [];
+  var scoreData = JSON.parse(localStorage.getItem('savedScores')); 
+  loadScoreArr.push(scoreData);
 
-//   console.log(loadScoreArr)
-//   storedScores.push(loadScoreArr);
+  console.log(loadScoreArr)
+  storedScores.push(...loadScoreArr);
 
-//   // console.log(loadScoreArr);
-// }
+  // console.log(loadScoreArr);
+}
 
-function saveScore() {
+function saveHighScore(event) {
 
   var playerName = document.querySelector("#player-input").value;
-  var scoreData = JSON.parse(localStorage.getItem('playerData')); 
-    if (scoreData === null) {
-      scoreData = [];
-    }
 
   var playerData = {
     player: playerName,
     score: score,
   };
+  var newScore = JSON.stringify(playerData);
 
-  localStorage.setItem('playerData', JSON.stringify([playerData]));
-
-  scoreData.push(playerData);
-
-  localStorage.setItem('playerData', JSON.stringify(scoreData))
+  localStorage.setItem('savedScores', newScore);
   
   // startEl.setAttribute('style', 'display: visible;');
   // hideElements();
@@ -303,7 +297,7 @@ function saveScore() {
 
 
 
-saveButton.addEventListener('click', saveScore());
+saveButton.addEventListener('click', saveHighScore);
 
 startEl.addEventListener('click', startQuiz);
 
