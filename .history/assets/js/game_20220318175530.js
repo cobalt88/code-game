@@ -267,9 +267,9 @@ function generateQuestions() {
 }
 
 function loadScores(){
-  var loadScoreArr = [];
-  var scoreData = JSON.parse(localStorage.getItem('savedScores')); 
-  
+  var storedScoreData = localStorage.getItem('savedScores');
+  var scoreData = JSON.parse(storedScoreData); 
+  var loadScoreArr = [scoreData];
   highScores.push(...loadScoreArr);
 
   // console.log(loadScoreArr);
@@ -277,7 +277,7 @@ function loadScores(){
 
 function saveHighScore(event) {
 
-
+  loadScores();
 
   
 
