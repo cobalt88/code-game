@@ -301,6 +301,10 @@ function saveScore(event) {
 
   localStorage.setItem('playerData', JSON.stringify(scoreData))
   
+  startEl.setAttribute('style', 'display: visible;');
+  hideElements();
+  questionEl.setAttribute('style', 'display: none;');
+  
 } 
 
 
