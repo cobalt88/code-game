@@ -276,7 +276,7 @@ function generateQuestions() {
 //   // console.log(loadScoreArr);
 // }
 
-function saveScore(event) {
+function saveScore() {
 
   
   var scoreData = JSON.parse(localStorage.getItem('playerData')); 
@@ -285,7 +285,7 @@ function saveScore(event) {
     }
 
     var playerName = document.querySelector("#player-input").value;
-
+    
     console.log(playerName);
 
   var playerData = {
@@ -301,15 +301,15 @@ function saveScore(event) {
 
   localStorage.setItem('playerData', JSON.stringify(scoreData))
   
-  startEl.setAttribute('style', 'display: visible;');
-  hideElements();
-  questionEl.setAttribute('style', 'display: none;');
+  // startEl.setAttribute('style', 'display: visible;');
+  // hideElements();
+  // questionEl.setAttribute('style', 'display: none;');
   
 } 
 
 
 
-saveButton.addEventListener('click', saveScore);
+saveButton.addEventListener('click', saveScore());
 
 startEl.addEventListener('click', startQuiz);
 
