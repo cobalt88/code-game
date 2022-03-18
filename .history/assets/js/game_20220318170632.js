@@ -15,7 +15,7 @@ var option4El = document.querySelector('#option4');
 var questionEl = document.querySelector('#question');
 var answers = document.querySelector(".answers");
 var options = document.querySelector(".options");
-var saveScoreForm = document.querySelector('#save-score-form');
+var highScoreForm = document.querySelector('#save-score-form');
 var saveButton = document.querySelector('#save-score');
 var button = document.getElementsByTagName("button");
 var timeLeft = 40;
@@ -143,7 +143,8 @@ function hideElements() {
   option4El.setAttribute('style', 'display: none;');
   scoreEl.setAttribute('style', 'display: none;');
   timerEl.setAttribute('style', 'display: none;');
-  saveScoreForm.setAttribute('style', 'display: none;')
+  highScoreForm.setAttribute('style', 'display: none;')
+  startEl.setAttribute('style', 'display: visible;');
 
 }
 
@@ -155,8 +156,8 @@ function startQuiz() {
   option4El.setAttribute('style', 'display: visible;');
   scoreEl.setAttribute('style', 'display: visible;');
   timerEl.setAttribute('style', 'display: visible;');
-  // loadScores();
-  // console.log(highScores);
+  loadScores();
+  console.log(highScores);
   scoreTracker();
   generateQuestions();
   countdown();
@@ -164,9 +165,9 @@ function startQuiz() {
   
 }
 
-// function loadScores(){
+function loadScores(){
 
-// }
+}
 
 function countdown() {
 
@@ -238,12 +239,12 @@ function verifyAnswerHandler(event){
 
 function displayMessage() {
   questionEl.textContent = (`Times Up! Your score for this round is: ${score}`);
-  saveScoreForm.setAttribute('style', 'display: visible;');
+  highScoreForm.setAttribute('style', 'display: visible;');
 }
 
 function displayMessage2() {
   questionEl.textContent = (`You have reached the end of the quiz! your score is: ${score}`);
-  saveScoreForm.setAttribute('style', 'display: visible;');
+  highScoreForm.setAttribute('style', 'display: visible;');
 }
 
 
@@ -277,11 +278,6 @@ function loadScores(){
 
 function saveHighScore(event) {
 
-  // var storedScoreData = localStorage.getItem('savedScores');
-  // var scoreData = JSON.parse(storedScoreData); 
-  // var loadScoreArr = [scoreData];
-  // highScores.push(...loadScoreArr)
-
   var playerName = document.querySelector("#player-input").value;
 
   var playerData = {
@@ -291,12 +287,9 @@ function saveHighScore(event) {
   var newScore = JSON.stringify(playerData);
 
   localStorage.setItem('savedScores', newScore);
-  
-  startEl.setAttribute('style', 'display: visible;');
-  hideElements();
-  questionEl.setAttribute('style', 'display: none;');
-  
-} 
+
+
+}
 
 
 

@@ -155,8 +155,8 @@ function startQuiz() {
   option4El.setAttribute('style', 'display: visible;');
   scoreEl.setAttribute('style', 'display: visible;');
   timerEl.setAttribute('style', 'display: visible;');
-  // loadScores();
-  // console.log(highScores);
+  loadScores();
+  console.log(highScores);
   scoreTracker();
   generateQuestions();
   countdown();
@@ -164,9 +164,9 @@ function startQuiz() {
   
 }
 
-// function loadScores(){
+function loadScores(){
 
-// }
+}
 
 function countdown() {
 
@@ -277,10 +277,10 @@ function loadScores(){
 
 function saveHighScore(event) {
 
-  // var storedScoreData = localStorage.getItem('savedScores');
-  // var scoreData = JSON.parse(storedScoreData); 
-  // var loadScoreArr = [scoreData];
-  // highScores.push(...loadScoreArr)
+  var storedScoreData = localStorage.getItem('savedScores');
+  var scoreData = JSON.parse(storedScoreData); 
+  var loadScoreArr = [scoreData];
+  highScores.push(...loadScoreArr)
 
   var playerName = document.querySelector("#player-input").value;
 

@@ -155,7 +155,7 @@ function startQuiz() {
   option4El.setAttribute('style', 'display: visible;');
   scoreEl.setAttribute('style', 'display: visible;');
   timerEl.setAttribute('style', 'display: visible;');
-  // loadScores();
+  loadScores();
   // console.log(highScores);
   scoreTracker();
   generateQuestions();

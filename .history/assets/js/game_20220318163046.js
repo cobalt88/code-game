@@ -15,13 +15,13 @@ var option4El = document.querySelector('#option4');
 var questionEl = document.querySelector('#question');
 var answers = document.querySelector(".answers");
 var options = document.querySelector(".options");
-var saveScoreForm = document.querySelector('#save-score-form');
+var highScoreForm = document.querySelector('#save-score-form');
 var saveButton = document.querySelector('#save-score');
 var button = document.getElementsByTagName("button");
 var timeLeft = 40;
 var score = 0;
 var questionsObj = 0;
-var highScores = []
+var highScores = [0]
 const questions = [
 
   {
@@ -143,20 +143,19 @@ function hideElements() {
   option4El.setAttribute('style', 'display: none;');
   scoreEl.setAttribute('style', 'display: none;');
   timerEl.setAttribute('style', 'display: none;');
-  saveScoreForm.setAttribute('style', 'display: none;')
-
+  highScoreForm.setAttribute('style', 'display: none;')
 }
 
 function startQuiz() {
   startEl.setAttribute('style', 'display: none;');
   option1El.setAttribute('style', 'display: visible;');
   option2El.setAttribute('style', 'display: visible;');
-  option3El.setAttribute('style', 'display: visible;');
+  option3El.setAttribute('st6yle', 'display: visible;');
   option4El.setAttribute('style', 'display: visible;');
   scoreEl.setAttribute('style', 'display: visible;');
   timerEl.setAttribute('style', 'display: visible;');
-  // loadScores();
-  // console.log(highScores);
+  loadScores();
+  console.log(highScores);
   scoreTracker();
   generateQuestions();
   countdown();
@@ -164,9 +163,9 @@ function startQuiz() {
   
 }
 
-// function loadScores(){
+function loadScores(){
 
-// }
+}
 
 function countdown() {
 
@@ -238,12 +237,12 @@ function verifyAnswerHandler(event){
 
 function displayMessage() {
   questionEl.textContent = (`Times Up! Your score for this round is: ${score}`);
-  saveScoreForm.setAttribute('style', 'display: visible;');
+  highScoreForm.setAttribute('style', 'display: visible;');
 }
 
 function displayMessage2() {
   questionEl.textContent = (`You have reached the end of the quiz! your score is: ${score}`);
-  saveScoreForm.setAttribute('style', 'display: visible;');
+  highScoreForm.setAttribute('style', 'display: visible;');
 }
 
 
@@ -267,36 +266,26 @@ function generateQuestions() {
 }
 
 function loadScores(){
-  var storedScoreData = localStorage.getItem('savedScores');
-  var scoreData = JSON.parse(storedScoreData); 
-  var loadScoreArr = [scoreData];
-  highScores.push(...loadScoreArr);
-
-  // console.log(loadScoreArr);
+  var existingScores = JSON.parse(localStorage.getItem('highScores'));
+  highScores.push(existingScores)
 }
 
 function saveHighScore(event) {
 
-  // var storedScoreData = localStorage.getItem('savedScores');
-  // var scoreData = JSON.parse(storedScoreData); 
-  // var loadScoreArr = [scoreData];
-  // highScores.push(...loadScoreArr)
-
   var playerName = document.querySelector("#player-input").value;
-
-  var playerData = {
+  
+  highScores.push([{
     player: playerName,
     score: score,
-  };
-  var newScore = JSON.stringify(playerData);
+  }])
 
-  localStorage.setItem('savedScores', newScore);
-  
-  startEl.setAttribute('style', 'display: visible;');
-  hideElements();
-  questionEl.setAttribute('style', 'display: none;');
-  
-} 
+  console.log(highScores)
+
+
+  localStorage.setItem('highScores', JSON.stringify(highScores));
+
+
+}
 
 
 

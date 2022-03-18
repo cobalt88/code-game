@@ -156,7 +156,7 @@ function startQuiz() {
   scoreEl.setAttribute('style', 'display: visible;');
   timerEl.setAttribute('style', 'display: visible;');
   // loadScores();
-  // console.log(highScores);
+  console.log(highScores);
   scoreTracker();
   generateQuestions();
   countdown();
@@ -266,21 +266,21 @@ function generateQuestions() {
   }
 }
 
-function loadScores(){
-  var storedScoreData = localStorage.getItem('savedScores');
-  var scoreData = JSON.parse(storedScoreData); 
-  var loadScoreArr = [scoreData];
-  highScores.push(...loadScoreArr);
+// function loadScores(){
+//   var storedScoreData = localStorage.getItem('savedScores');
+//   var scoreData = JSON.parse(storedScoreData); 
+//   var loadScoreArr = [scoreData];
+//   highScores.push(...loadScoreArr);
 
-  // console.log(loadScoreArr);
-}
+//   // console.log(loadScoreArr);
+// }
 
 function saveHighScore(event) {
 
-  // var storedScoreData = localStorage.getItem('savedScores');
-  // var scoreData = JSON.parse(storedScoreData); 
-  // var loadScoreArr = [scoreData];
-  // highScores.push(...loadScoreArr)
+  var storedScoreData = localStorage.getItem('savedScores');
+  var scoreData = JSON.parse(storedScoreData); 
+  var loadScoreArr = [scoreData];
+  highScores.push(...loadScoreArr)
 
   var playerName = document.querySelector("#player-input").value;
 
