@@ -27,13 +27,14 @@ var saveButton = document.querySelector('#save-score');
 var restartButton = document.querySelector('#restart');
 var homeButton = document.querySelector('#return-home');
 var button = document.getElementsByTagName("button");
-var timeLeft = 40;
+var timeLeft = 120;
 var score = 0;
 var questionsObj = 0;
 var storedScores = JSON.parse(localStorage.getItem('playerData')); 
 if (storedScores === null) {
   storedScores = [];
 }
+
 var highScore = Math.max(...storedScores.map((o) => o.score), 0);
   
 // console.log(highScore)
@@ -151,6 +152,8 @@ const questions = [
   }
 ];
 
+console.log(questions.length);
+
 function hideElements() {
   option1El.setAttribute('style', 'display: none;');
   option2El.setAttribute('style', 'display: none;');
@@ -233,24 +236,24 @@ function verifyAnswerHandler(event){
 
   if (targetData === 'correct' ) {
     score = score + 10;
-      if (questionsObj < 9) {
+      if (questionsObj < questions.length) {
         questionsObj++;
         generateQuestions();
         scoreTracker();
-      } 
+      } else if (questionsObj === questions.length){
+        endQuiz();
+      }
   }
   
   if (targetData === 'incorrect') {
     timeLeft = timeLeft - 10;
-      if (questionsObj < 9) {
+      if (questionsObj < questions.length) {
         questionsObj++;
         generateQuestions();
         scoreTracker();
-      } 
-  }
-  
-  if (questionsObj >= 9) {
-    endQuiz();
+      } else if(questionsObj === questions.length) {
+        endQuiz();
+      }
   }
 } 
 
