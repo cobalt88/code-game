@@ -7,25 +7,36 @@ var timerEl = document.querySelector('#timer');
 var scoreDisplayEl = document.querySelector('#score');
 //scoreEl is the header that contains the score display
 var scoreEl = document.querySelector('#scoreTracker');
+// start button to begin the quiz
 var startEl = document.querySelector('#start');
+// optionEl 1-4, and questionEl are for the questions and their answers
 var option1El = document.querySelector('#option1');
 var option2El = document.querySelector('#option2');
 var option3El = document.querySelector('#option3');
 var option4El = document.querySelector('#option4');
 var questionEl = document.querySelector('#question');
+// answers variable is currently not in use, may be used to target optionsEl 1-4 if needed.
 var answers = document.querySelector(".answers");
-var highScoreDisplayEl = document.querySelector('#high-score')
+// highScoreDisplayEl targets the h2 element that displays the high scrore
+var highScoreDisplayEl = document.querySelector('#high-score');
+// options is used to target the parent container for the questions/answer
 var options = document.querySelector(".options");
+// saveScoreForm used to target the form provided at the end of the quiz
 var saveScoreForm = document.querySelector('#save-score-form');
 var saveButton = document.querySelector('#save-score');
+var restartButton = document.querySelector('#restart');
+var homeButton = document.querySelector('#return-home');
 var button = document.getElementsByTagName("button");
 var timeLeft = 40;
 var score = 0;
 var questionsObj = 0;
-var storedScores = []
-var highScore = Math.max(...storedScores.map(o => o.y), 0);
+var storedScores = JSON.parse(localStorage.getItem('playerData')); 
+if (storedScores === null) {
+  storedScores = [];
+}
+var highScore = Math.max(...storedScores.map((o) => o.score), 0);
   
-console.log(storedScores)
+// console.log(highScore)
 const questions = [
 
   {
@@ -148,6 +159,8 @@ function hideElements() {
   scoreEl.setAttribute('style', 'display: none;');
   timerEl.setAttribute('style', 'display: none;');
   saveScoreForm.setAttribute('style', 'display: none;')
+  highScoreDisplayEl.textContent = (`High Score ${highScore}`);
+  restartButton.setAttribute('style', 'display: none;');
 }
 
 function startQuiz() {
@@ -158,7 +171,10 @@ function startQuiz() {
   option4El.setAttribute('style', 'display: visible;');
   scoreEl.setAttribute('style', 'display: visible;');
   timerEl.setAttribute('style', 'display: visible;');
-  // highScoreDisplayEl.textContent = highScore;
+  restartButton.setAttribute('style', 'display: visible;');
+  homeButton.setAttribute('style', 'display: visible;');
+
+  
   scoreTracker();
   generateQuestions();
   countdown();
@@ -241,11 +257,13 @@ function verifyAnswerHandler(event){
 function displayMessage() {
   questionEl.textContent = (`Times Up! Your score for this round is: ${score}`);
   saveScoreForm.setAttribute('style', 'display: visible;');
+  // restartButton.setAttribute('style', 'display: visible;');
 }
 
 function displayMessage2() {
   questionEl.textContent = (`You have reached the end of the quiz! your score is: ${score}`);
   saveScoreForm.setAttribute('style', 'display: visible;');
+  // restartButton.setAttribute('style', 'display: visible;');
 }
 
 
@@ -269,15 +287,10 @@ function generateQuestions() {
 }
 
 
+
 function saveScore(event) {
 
-  
-  var scoreData = JSON.parse(localStorage.getItem('playerData')); 
-    if (scoreData === null) {
-      scoreData = [];
-    }
-
-    var playerName = document.querySelector("#player-input").value;
+  var playerName = document.querySelector("#player-input").value;
 
 
   var playerData = {
@@ -285,20 +298,19 @@ function saveScore(event) {
     score: score,
   };
 
-
   localStorage.setItem('playerData', JSON.stringify([playerData]));
 
-  scoreData.push(playerData);
+  storedScores.push(playerData);
   
-  
-  localStorage.setItem('playerData', JSON.stringify(scoreData))
-  storedScores.push(scoreData)
-  
-  
+  localStorage.setItem('playerData', JSON.stringify(storedScores))
 } 
 
+function restart(event) {
+  window.location.reload();
+}
 
 
+restartButton.addEventListener('click', restart);
 
 saveButton.addEventListener('click', saveScore);
 
