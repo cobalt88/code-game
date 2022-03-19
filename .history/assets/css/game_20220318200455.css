@@ -10,12 +10,15 @@ body {
 
 header, header h2 {
   display: flex;
-  margin: 20px;
-  flex-direction: column;
+  margin: 50px;
+  flex-direction: row;
   align-items: center;
 }
 
-
+#question {
+  display: flex;
+  flex-direction: column;
+}
 
 .options button {
   display: flex;

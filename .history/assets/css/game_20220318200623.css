@@ -10,7 +10,7 @@ body {
 
 header, header h2 {
   display: flex;
-  margin: 20px;
+  margin: 50px;
   flex-direction: column;
   align-items: center;
 }

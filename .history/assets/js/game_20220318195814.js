@@ -14,7 +14,6 @@ var option3El = document.querySelector('#option3');
 var option4El = document.querySelector('#option4');
 var questionEl = document.querySelector('#question');
 var answers = document.querySelector(".answers");
-var highScoreDisplayEl = document.querySelector('#high-score')
 var options = document.querySelector(".options");
 var saveScoreForm = document.querySelector('#save-score-form');
 var saveButton = document.querySelector('#save-score');
@@ -23,9 +22,6 @@ var timeLeft = 40;
 var score = 0;
 var questionsObj = 0;
 var storedScores = []
-var highScore = Math.max(...storedScores.map(o => o.y), 0);
-  
-console.log(storedScores)
 const questions = [
 
   {
@@ -148,6 +144,7 @@ function hideElements() {
   scoreEl.setAttribute('style', 'display: none;');
   timerEl.setAttribute('style', 'display: none;');
   saveScoreForm.setAttribute('style', 'display: none;')
+
 }
 
 function startQuiz() {
@@ -158,7 +155,6 @@ function startQuiz() {
   option4El.setAttribute('style', 'display: visible;');
   scoreEl.setAttribute('style', 'display: visible;');
   timerEl.setAttribute('style', 'display: visible;');
-  // highScoreDisplayEl.textContent = highScore;
   scoreTracker();
   generateQuestions();
   countdown();
@@ -268,6 +264,15 @@ function generateQuestions() {
   }
 }
 
+// function loadScores(){
+//   var loadScoreArr = [];
+//   loadScoreArr.push(scoreData);
+
+//   console.log(loadScoreArr)
+//   storedScores.push(loadScoreArr);
+
+//   // console.log(loadScoreArr);
+// }
 
 function saveScore(event) {
 
@@ -279,21 +284,20 @@ function saveScore(event) {
 
     var playerName = document.querySelector("#player-input").value;
 
+    console.log(playerName);
 
   var playerData = {
     player: playerName,
     score: score,
   };
 
+  console.log(playerData);
 
   localStorage.setItem('playerData', JSON.stringify([playerData]));
 
   scoreData.push(playerData);
-  
-  
+
   localStorage.setItem('playerData', JSON.stringify(scoreData))
-  storedScores.push(scoreData)
-  
   
 } 
 

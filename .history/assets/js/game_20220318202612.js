@@ -24,8 +24,8 @@ var score = 0;
 var questionsObj = 0;
 var storedScores = []
 var highScore = Math.max(...storedScores.map(o => o.y), 0);
-  
-console.log(storedScores)
+  console.log(storedScores)
+  console.log(highScore);
 const questions = [
 
   {
@@ -289,11 +289,8 @@ function saveScore(event) {
   localStorage.setItem('playerData', JSON.stringify([playerData]));
 
   scoreData.push(playerData);
-  
-  
+
   localStorage.setItem('playerData', JSON.stringify(scoreData))
-  storedScores.push(scoreData)
-  
   
 } 
 
