@@ -36,6 +36,12 @@ if (storedScores === null) {
 }
 
 var highScore = Math.max(...storedScores.map((o) => o.score), 0);
+
+storedScores.sort((a,b) => {
+  return b.score - a.score;
+})
+
+console.log(storedScores);
   
 // console.log(highScore)
 const questions = [
@@ -154,6 +160,11 @@ const questions = [
 
 console.log(questions.length);
 
+// saveScoreForm.setAttribute('style', 'display: none;')
+  restartButton.setAttribute('style', 'display: none;');
+  homeButton.setAttribute('style', 'display: none;');
+
+
 function hideElements() {
   option1El.setAttribute('style', 'display: none;');
   option2El.setAttribute('style', 'display: none;');
@@ -162,8 +173,8 @@ function hideElements() {
   scoreEl.setAttribute('style', 'display: none;');
   timerEl.setAttribute('style', 'display: none;');
   saveScoreForm.setAttribute('style', 'display: none;')
-  highScoreDisplayEl.textContent = (`High Score ${highScore}`);
-  restartButton.setAttribute('style', 'display: none;');
+  highScoreDisplayEl.textContent = (`High Score: ${storedScores[0].player}, ${storedScores[0].score} points`);
+  // restartButton.setAttribute('style', 'display: none;');
 }
 
 function startQuiz() {
@@ -236,22 +247,22 @@ function verifyAnswerHandler(event){
 
   if (targetData === 'correct' ) {
     score = score + 10;
-      if (questionsObj < questions.length) {
+      if (questionsObj < 9) {
         questionsObj++;
         generateQuestions();
         scoreTracker();
-      } else if (questionsObj === questions.length){
+      } else if (questionsObj === 9){
         endQuiz();
       }
   }
   
   if (targetData === 'incorrect') {
     timeLeft = timeLeft - 10;
-      if (questionsObj < questions.length) {
+      if (questionsObj < 9) {
         questionsObj++;
         generateQuestions();
         scoreTracker();
-      } else if(questionsObj === questions.length) {
+      } else if(questionsObj === 9) {
         endQuiz();
       }
   }
