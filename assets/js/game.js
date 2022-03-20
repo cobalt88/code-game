@@ -188,7 +188,6 @@ function startQuiz() {
   countdown();
 }
 
-
 function countdown() {
 
   var timeInterval = setInterval(function () {
@@ -224,13 +223,13 @@ function endQuiz() {
   }
 }
 
-
 function scoreTracker() {
   if (score >= 0 && timeLeft > 0) {
     scoreEl.textContent = (`Current Score: ${score}`);
   }
 }
 
+// the verify answer handler checks the class attributes of the questions that are loaded from the array. 
 function verifyAnswerHandler(event) {
   var targetEl = event.target;
   var targetData = targetEl.getAttribute("class");
@@ -254,19 +253,21 @@ function verifyAnswerHandler(event) {
     }
 }
 
+// this message should only display if the the timer runs out before you reach the ned of the quiz
 function displayMessage() {
   questionEl.textContent = (`Times Up! Your score for this round is: ${score}`);
   saveScoreForm.setAttribute('style', 'display: visible;');
 }
 
+//this message will only display if you reach the end of the quiz before the timer runs out. 
 function displayMessage2() {
   questionEl.textContent = (`You have reached the end of the quiz! your score is: ${score}`);
   saveScoreForm.setAttribute('style', 'display: visible;');
 }
 
-
 function generateQuestions() {
-  // generate text content of question
+  // generate text content of question by itterating over the text of the buttons using data pulled from the questions array. 
+  // each question pull 2 pieces of information, the text string that will be the questin or answer, and the data property assigned to that object to determine if the answer is correct or incorrect. 
   if (timeLeft >= 1) {
     questionEl.textContent = questions[questionsObj].question;
 
@@ -285,7 +286,7 @@ function generateQuestions() {
 }
 
 
-
+// save score and playername to local storage, this is not automatic, it will only save if the player clicks the save button. 
 function saveScore(event) {
 
   var playerName = document.querySelector("#player-input").value;
@@ -303,11 +304,12 @@ function saveScore(event) {
   localStorage.setItem('playerData', JSON.stringify(storedScores))
 }
 
+// funtion for the restart button to take you back to the start of the quiz via reloading the page.
 function restart(event) {
   window.location.reload();
 }
 
-
+// event listeners for the various buttons 
 restartButton.addEventListener('click', restart);
 
 saveButton.addEventListener('click', saveScore);
