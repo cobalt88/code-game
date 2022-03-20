@@ -16,8 +16,8 @@ This repository is deticated to a dynamic timed quiz base. Styling is minimal to
 
 ##### One click quiz progression, as soon as an answer is selected the quiz moves to the next question whether its correct or not. 
 
-![alt text](./assets/images/_D__code-game_index.html%20(1).png)
-1[alt text](./assets/images/_D__code-game_assets_subpages_game.html%20(1).png)
+![Alt text](./assets/images/_D__code-game_index.html%20(1).png)
+![Alt text](./assets/images/_D__code-game_assets_subpages_game.html%20(1).png)
 
 
 Live site:
