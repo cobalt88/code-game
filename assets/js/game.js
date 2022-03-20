@@ -195,13 +195,8 @@ function startQuiz() {
   scoreTracker();
   generateQuestions();
   countdown();
-
-
 }
 
-// function loadScores(){
-
-// }
 
 function countdown() {
 
@@ -271,13 +266,11 @@ function verifyAnswerHandler(event) {
 function displayMessage() {
   questionEl.textContent = (`Times Up! Your score for this round is: ${score}`);
   saveScoreForm.setAttribute('style', 'display: visible;');
-  // restartButton.setAttribute('style', 'display: visible;');
 }
 
 function displayMessage2() {
   questionEl.textContent = (`You have reached the end of the quiz! your score is: ${score}`);
   saveScoreForm.setAttribute('style', 'display: visible;');
-  // restartButton.setAttribute('style', 'display: visible;');
 }
 
 
