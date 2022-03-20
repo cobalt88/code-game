@@ -32,20 +32,15 @@ var timeLeft = 120;
 var score = 0;
 var questionsObj = 0;
 var storedScores = JSON.parse(localStorage.getItem('playerData'));
-
-
 if (storedScores === null) {
   storedScores = [];
 }
-
-var highScore = Math.max(...storedScores.map((o) => o.score), 0);
 
 storedScores.sort((a, b) => {
   return b.score - a.score;
 })
 
 const questions = [
-
   {
     question: "question1 goes here",
     answer1: "answer1 goes here",
@@ -157,17 +152,16 @@ const questions = [
     data4: 'incorrect',
   }
 ];
-
+// thai variable is used by the verify answer handler, it is in global scopse to allow it to be used by future additions if needed. 
 var arrLength = 0
 if (questions.length > 0) {
   arrLength = questions.length - 1;
 };
 
-// saveScoreForm.setAttribute('style', 'display: none;')
 restartButton.setAttribute('style', 'display: none;');
 homeButton.setAttribute('style', 'display: none;');
 
-
+// this is the first function to execute,
 function hideElements() {
   option1El.setAttribute('style', 'display: none;');
   option2El.setAttribute('style', 'display: none;');
@@ -176,10 +170,9 @@ function hideElements() {
   scoreEl.setAttribute('style', 'display: none;');
   timerEl.setAttribute('style', 'display: none;');
   saveScoreForm.setAttribute('style', 'display: none;')
-  // highScoreDisplayEl.textContent = (`High Score: ${storedScores[0].player}, ${storedScores[0].score} points`);
-  // restartButton.setAttribute('style', 'display: none;');
 }
 
+//as soon as the start button is clicked this is the next funtion to execute.
 function startQuiz() {
   startEl.setAttribute('style', 'display: none;');
   option1El.setAttribute('style', 'display: visible;');
@@ -190,8 +183,6 @@ function startQuiz() {
   timerEl.setAttribute('style', 'display: visible;');
   restartButton.setAttribute('style', 'display: visible;');
   homeButton.setAttribute('style', 'display: visible;');
-
-
   scoreTracker();
   generateQuestions();
   countdown();
