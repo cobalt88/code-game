@@ -27,28 +27,28 @@ var saveButton = document.querySelector('#save-score');
 var restartButton = document.querySelector('#restart');
 var homeButton = document.querySelector('#return-home');
 var button = document.getElementsByTagName("button");
+// starting timer
 var timeLeft = 120;
 var score = 0;
 var questionsObj = 0;
-var storedScores = JSON.parse(localStorage.getItem('playerData')); 
+var storedScores = JSON.parse(localStorage.getItem('playerData'));
+
+
 if (storedScores === null) {
   storedScores = [];
 }
 
 var highScore = Math.max(...storedScores.map((o) => o.score), 0);
 
-storedScores.sort((a,b) => {
+storedScores.sort((a, b) => {
   return b.score - a.score;
 })
 
-console.log(storedScores);
-  
-// console.log(highScore)
 const questions = [
 
   {
-    question: "question1 goes here",  
-    answer1: "answer1 goes here", 
+    question: "question1 goes here",
+    answer1: "answer1 goes here",
     data1: 'correct',
     answer2: "correct answer goes here",
     data2: 'incorrect',
@@ -56,7 +56,7 @@ const questions = [
     data3: 'incorrect',
     answer4: "answer4 goes here",
     data4: 'incorrect',
-  }, 
+  },
   {
     question: "question2 goes here",
     answer1: "answer1 goes here",
@@ -89,7 +89,7 @@ const questions = [
     data3: 'incorrect',
     answer4: "answer4 goes here",
     data4: 'incorrect',
-  }, 
+  },
   {
     question: "question5 goes here",
     answer1: "answer1 goes here",
@@ -158,11 +158,14 @@ const questions = [
   }
 ];
 
-console.log(questions.length);
+var arrLength = 0
+if (questions.length > 0) {
+  arrLength = questions.length - 1;
+};
 
 // saveScoreForm.setAttribute('style', 'display: none;')
-  restartButton.setAttribute('style', 'display: none;');
-  homeButton.setAttribute('style', 'display: none;');
+restartButton.setAttribute('style', 'display: none;');
+homeButton.setAttribute('style', 'display: none;');
 
 
 function hideElements() {
@@ -173,7 +176,7 @@ function hideElements() {
   scoreEl.setAttribute('style', 'display: none;');
   timerEl.setAttribute('style', 'display: none;');
   saveScoreForm.setAttribute('style', 'display: none;')
-  highScoreDisplayEl.textContent = (`High Score: ${storedScores[0].player}, ${storedScores[0].score} points`);
+  // highScoreDisplayEl.textContent = (`High Score: ${storedScores[0].player}, ${storedScores[0].score} points`);
   // restartButton.setAttribute('style', 'display: none;');
 }
 
@@ -188,12 +191,12 @@ function startQuiz() {
   restartButton.setAttribute('style', 'display: visible;');
   homeButton.setAttribute('style', 'display: visible;');
 
-  
+
   scoreTracker();
   generateQuestions();
   countdown();
-  
-  
+
+
 }
 
 // function loadScores(){
@@ -203,7 +206,7 @@ function startQuiz() {
 function countdown() {
 
   var timeInterval = setInterval(function () {
-        timeDisplayEl.textContent = timeLeft;
+    timeDisplayEl.textContent = timeLeft;
 
     if (timeLeft > 0) {
       timeLeft--;
@@ -223,50 +226,47 @@ function endQuiz() {
   }
 
   if (timeLeft >= 0) {
-  timeLeft = 0;
-  option1El.setAttribute('style', 'display: none;');
-  option2El.setAttribute('style', 'display: none;');
-  option3El.setAttribute('style', 'display: none;');
-  option4El.setAttribute('style', 'display: none;');
-  timerEl.setAttribute('style', 'display: none;');
-  scoreEl.setAttribute('style', 'display: none;');
-  questionEl.textContent = (' ')
-  displayMessage2();
-  } 
+    timeLeft = 0;
+    option1El.setAttribute('style', 'display: none;');
+    option2El.setAttribute('style', 'display: none;');
+    option3El.setAttribute('style', 'display: none;');
+    option4El.setAttribute('style', 'display: none;');
+    timerEl.setAttribute('style', 'display: none;');
+    scoreEl.setAttribute('style', 'display: none;');
+    questionEl.textContent = (' ')
+    displayMessage2();
+  }
 }
 
 
 function scoreTracker() {
   if (score >= 0 && timeLeft > 0) {
     scoreEl.textContent = (`Current Score: ${score}`);
-}}
+  }
+}
 
-function verifyAnswerHandler(event){
+function verifyAnswerHandler(event) {
   var targetEl = event.target;
   var targetData = targetEl.getAttribute("class");
 
-  if (targetData === 'correct' ) {
+  console.log(arrLength);
+
+  if (targetData === 'correct') {
     score = score + 10;
-      if (questionsObj < 9) {
-        questionsObj++;
-        generateQuestions();
-        scoreTracker();
-      } else if (questionsObj === 9){
-        endQuiz();
-      }
   }
-  
+
   if (targetData === 'incorrect') {
     timeLeft = timeLeft - 10;
-      if (questionsObj < 9) {
-        questionsObj++;
-        generateQuestions();
-        scoreTracker();
-      } else if(questionsObj === 9) {
-        endQuiz();
-      }
   }
-} 
+
+    if (questionsObj < arrLength) {
+      questionsObj++
+      generateQuestions();
+      scoreTracker();
+    } else if (questionsObj === arrLength) {
+      endQuiz();
+    }
+}
 
 function displayMessage() {
   questionEl.textContent = (`Times Up! Your score for this round is: ${score}`);
@@ -285,7 +285,7 @@ function generateQuestions() {
   // generate text content of question
   if (timeLeft >= 1) {
     questionEl.textContent = questions[questionsObj].question;
-    
+
     option1El.textContent = questions[questionsObj].answer1;
     option1El.setAttribute('class', questions[questionsObj].data1);
 
@@ -315,9 +315,9 @@ function saveScore(event) {
   localStorage.setItem('playerData', JSON.stringify([playerData]));
 
   storedScores.push(playerData);
-  
+
   localStorage.setItem('playerData', JSON.stringify(storedScores))
-} 
+}
 
 function restart(event) {
   window.location.reload();
